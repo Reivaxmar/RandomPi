@@ -7,7 +7,6 @@ import math
 
 pygame.init()
 
-# Set up the drawing window
 screen = pygame.display.set_mode((400, 400))
 
 random.seed(datetime.now().timestamp())

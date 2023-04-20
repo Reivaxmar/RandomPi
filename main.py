@@ -4,6 +4,7 @@ import pygame
 import random
 import math
 
+# Test
 pygame.init()
 
 pos = []

@@ -1,6 +1,5 @@
-# Simple pygame program
+from datetime import datetime
 
-# Import and initialize the pygame library
 import pygame
 import random
 import math
@@ -12,13 +11,16 @@ pos = []
 # Set up the drawing window
 screen = pygame.display.set_mode((400, 400))
 
+random.seed(datetime.now().timestamp())
+
 inside = 0
 total = 0
 # Run until the user asks to quit
 running = True
 
-screen.fill((255, 255, 255))
-pygame.draw.circle(screen, (0, 0, 255), (0, 400), 400)
+screen.fill((230, 230, 255))
+pygame.draw.circle(screen, (0, 0, 0), (0, 400), 400)
+pygame.draw.circle(screen, (0, 0, 255), (0, 400), 398)
 
 while running:
 
@@ -30,12 +32,16 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
 
-    pos.append([random.randrange(0, 399), random.randrange(0, 399)])
-    pygame.draw.circle(screen, (0, 0, 0), (pos[len(pos)-1][0] - 1, pos[len(pos)-1][1] - 1), 2)
+    pos.append([random.random(), random.random()])
+    dist1 = math.sqrt(pos[len(pos)-1][0] ** 2 + (pos[len(pos)-1][1] - 1) ** 2)
+    if dist1 <= 1.0:
+        pygame.draw.circle(screen, (0, 255, 0), (pos[len(pos)-1][0] * 400.0, pos[len(pos)-1][1] * 400.0), 2)
+    else:
+        pygame.draw.circle(screen, (255, 0, 0), (pos[len(pos) - 1][0] * 400.0, pos[len(pos) - 1][1] * 400.0), 2)
     for i in range(0, 20000):
-        pair = [random.randrange(0, 399), random.randrange(0, 399)]
-        dist = math.dist(pair, [0, 250])
-        if dist <= 400.0:
+        pair = [random.random(), random.random()]
+        dist = math.sqrt(pair[0] ** 2 + pair[1] ** 2)
+        if dist <= 1.0:
             inside += 1
         total += 1
     print(inside / total * 4)

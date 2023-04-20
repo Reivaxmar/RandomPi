@@ -7,8 +7,6 @@ import math
 
 pygame.init()
 
-pos = []
-
 # Set up the drawing window
 screen = pygame.display.set_mode((400, 400))
 
@@ -33,12 +31,12 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
 
-    pos.append([random.random(), random.random()])
-    dist1 = math.sqrt(pos[len(pos)-1][0] ** 2 + (pos[len(pos)-1][1] - 1) ** 2)
+    pair1 = [random.random(), random.random()]
+    dist1 = math.sqrt(pair1[0] ** 2 + (pair1[1] - 1) ** 2)
     if dist1 <= 1.0:
-        pygame.draw.circle(screen, (0, 255, 0), (pos[len(pos)-1][0] * 400.0, pos[len(pos)-1][1] * 400.0), 2)
+        pygame.draw.circle(screen, (0, 255, 0), (pair1[0] * 400.0, pair1[1] * 400.0), 2)
     else:
-        pygame.draw.circle(screen, (255, 0, 0), (pos[len(pos) - 1][0] * 400.0, pos[len(pos) - 1][1] * 400.0), 2)
+        pygame.draw.circle(screen, (255, 0, 0), (pair1[0] * 400.0, pair1[1] * 400.0), 2)
     for i in range(0, 20000):
         pair = [random.random(), random.random()]
         dist = math.sqrt(pair[0] ** 2 + pair[1] ** 2)

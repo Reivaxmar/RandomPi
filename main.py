@@ -6,6 +6,7 @@ import math
 # Init variables
 pygame.init()
 screen = pygame.display.set_mode((400, 400))
+pygame.display.set_caption("Pi aleatori")
 random.seed(datetime.now().timestamp())
 inside = 0
 total = 0

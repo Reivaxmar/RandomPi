@@ -6,9 +6,12 @@ import HardCodes
 
 # Init variables
 pygame.init()
-screen = pygame.display.set_mode(HardCodes.screenSize)
+pygame.font.init()
+screen = pygame.display.set_mode(tuple(map(sum, zip(HardCodes.screenSize, (0, 50)))))
 pygame.display.set_caption(HardCodes.title)
 random.seed(datetime.now().timestamp())
+
+my_font = pygame.font.SysFont('Comic Sans MS', 32)
 inside = 0
 total = 0
 running = True
@@ -27,6 +30,10 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
 
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, 400, 400, 100))
+    pygame.draw.rect(screen, HardCodes.backColor, pygame.Rect(HardCodes.outlineSize, 400 + HardCodes.outlineSize, 400 - HardCodes.outlineSize * 2, 50 - HardCodes.outlineSize * 2))
+
+
     # Draw the point
     pair1 = [random.random(), random.random()]
     dist1 = math.sqrt(pair1[0] ** 2 + (pair1[1] - 1) ** 2)
@@ -43,8 +50,12 @@ while running:
             inside += 1
         total += 1
     # Print the approximated pi and the inside and total points
-    print(inside / total * 4)
-    print(f"{inside}, {total}")
+    if HardCodes.printInConsole:
+        print(inside / total * 4)
+        print(f"{inside}, {total}")
+
+    text_surface = my_font.render(f"{inside / total * 4}", False, (0, 0, 0))
+    screen.blit(text_surface, (10, 401))
 
     # Display the screen
     pygame.display.flip()

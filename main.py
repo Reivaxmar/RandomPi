@@ -2,20 +2,21 @@ from datetime import datetime
 import pygame
 import random
 import math
+import HardCodes
 
 # Init variables
 pygame.init()
-screen = pygame.display.set_mode((400, 400))
-pygame.display.set_caption("Pi aleatori")
+screen = pygame.display.set_mode(HardCodes.screenSize)
+pygame.display.set_caption(HardCodes.title)
 random.seed(datetime.now().timestamp())
 inside = 0
 total = 0
 running = True
 
 # Clear the screen and draw the circle
-screen.fill((230, 230, 255))
-pygame.draw.circle(screen, (0, 0, 0), (0, 400), 400)
-pygame.draw.circle(screen, (0, 0, 255), (0, 400), 398)
+screen.fill(HardCodes.backColor)
+pygame.draw.circle(screen, HardCodes.outlineColor, (0, 400), 400)
+pygame.draw.circle(screen, HardCodes.circleColor, (0, 400), 400-HardCodes.outlineSize)
 
 while running:
     # Quit if the application is closed or the Escape key is pressed
@@ -35,7 +36,7 @@ while running:
         pygame.draw.circle(screen, (255, 0, 0), (pair1[0] * 400.0, pair1[1] * 400.0), 2)
 
     # Iterate some more times for a better approximations
-    for i in range(0, 20000):
+    for i in range(0, HardCodes.calcsPerPoint):
         pair = [random.random(), random.random()]
         dist = math.sqrt(pair[0] ** 2 + pair[1] ** 2)
         if dist <= 1.0:
